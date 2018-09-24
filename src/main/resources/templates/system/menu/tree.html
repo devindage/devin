@@ -16,7 +16,7 @@ button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
 	</div>
 	<div class="treeSearchInput" id="search">
 		<label for="keyword">关键字：</label><input type="text" class="empty" id="keyword" maxlength="50">
-		<button class="btn" id="btn" onclick="searchNode()"> 搜索 </button>
+		<button class="btn" id="btn" onclick="searchNode()"> <span th:text="#{common.search}"></span> </button>
 	</div>
 	<div class="treeExpandCollapse">
 		<a href="javascript:" id="btnExpand">展开</a> /

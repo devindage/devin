@@ -69,7 +69,10 @@ function SmoothlyMenu() {
         $('#side-menu').removeAttr('style');
     }
 }
-
+function changeLang(lang){
+    document.cookie="lang="+lang;
+    location.reload();
+}
 /**
  * iframe处理
  */

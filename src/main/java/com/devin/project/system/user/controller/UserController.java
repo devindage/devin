@@ -1,8 +1,11 @@
 package com.devin.project.system.user.controller;
 
 import java.util.List;
+import java.util.Locale;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -22,6 +25,8 @@ import com.devin.project.system.post.service.IPostService;
 import com.devin.project.system.role.service.IRoleService;
 import com.devin.project.system.user.domain.User;
 import com.devin.project.system.user.service.IUserService;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
  * 用户信息

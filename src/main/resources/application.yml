@@ -46,6 +46,7 @@ spring:
   messages:
     #国际化资源文件路径
     basename: i18n/messages
+    encoding: utf-8
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss

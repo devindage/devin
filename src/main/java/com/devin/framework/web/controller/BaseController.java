@@ -3,6 +3,8 @@ package com.devin.framework.web.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -16,6 +18,9 @@ import com.devin.framework.web.page.TableDataInfo;
 import com.devin.framework.web.page.TableSupport;
 import com.devin.project.system.user.domain.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * web层通用数据处理
  * 
@@ -23,6 +28,11 @@ import com.devin.project.system.user.domain.User;
  */
 public class BaseController
 {
+    @Autowired
+    protected HttpServletRequest request;
+    @Autowired
+    protected HttpServletResponse response;
+
     /**
      * 将前台传递过来的日期格式的字符串，自动转化为Date类型
      */

@@ -104,9 +104,18 @@
                     <a href="javascript:;" class="active menuTab" data-id="/system/main">首页</a>
                 </div>
             </nav>
-            <button class="roll-nav roll-right tabRight">
+            <button class="roll-nav roll-right tabRight" style="right: 240px" >
                 <i class="fa fa-forward"></i>
             </button>
+            <div class="btn-group roll-nav roll-right" style="right: 140px;width: 100px;">
+                <button class="dropdown J_tabClose" data-toggle="dropdown" aria-expanded="false" style="width: 100px;">
+                    语言切换<span class="caret"></span>
+                </button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li><a class="" onclick="changeLang('zh_CN')">中文</a></li>
+                    <li><a class="" onclick="changeLang('en_US')">英文</a></li>
+                </ul>
+            </div>
             <div class="btn-group roll-nav roll-right">
                 <button class="dropdown J_tabClose" data-toggle="dropdown">
                                                                           页签操作<span class="caret"></span>
@@ -117,6 +126,7 @@
 					 <li><a class="tabCloseAll" href="javascript:void();">全部关闭</a></li>
                 </ul>
             </div>
+
             <a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
         </div>
         <div class="row mainContent" id="content-main">

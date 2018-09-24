@@ -18,8 +18,8 @@
 								操作人员：<input type="text" name="loginName"/>
 							</li>
 							<li>
-								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;<span th:text="#{common.search}"></span></a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;<span th:text="#{common.reset}"></span></a>
 							</li>
 						</ul>
 					</div>
@@ -28,7 +28,7 @@
 			
 	        <div class="btn-group hidden-xs" id="toolbar" role="group">
 	            <a class="btn btn-outline btn-danger btn-rounded" onclick="javascript:batchForceLogout()" shiro:hasPermission="monitor:online:batchForceLogout">
-	                <i class="fa fa-trash-o"></i> 删除
+	                <i class="fa fa-trash-o"></i> <span th:text="#{common.delete}"></span>
 	            </a>
 	        </div>
 	        
