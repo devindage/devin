@@ -61,5 +61,9 @@ public class Constants
      * 排序的方向 "desc" 或者 "asc".
      */
     public static String IS_ASC = "isAsc";
+    /**
+     * orderByColumn 是否下划线转换,1-不处理
+     */
+    public static String IS_TRANSFER = "isTransfer";
 
 }
