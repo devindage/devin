@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectTableList" parameterType="TableInfo" resultMap="TableInfoResult">
 		<include refid="selectGenVo"/>
-		where table_comment <![CDATA[ <> ]]> '' and table_schema = (select database())
+		where table_schema = (select database())
 		<if test="tableName != null and tableName != ''">
 			AND table_name like concat('%', #{tableName}, '%')
 		</if>
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectTableByName" parameterType="String" resultMap="TableInfoResult">
 		<include refid="selectGenVo"/>
-		where table_comment <![CDATA[ <> ]]> '' and table_schema = (select database())
+		where table_schema = (select database())
 		and table_name = #{tableName}
 	</select>
 	
