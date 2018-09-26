@@ -109,21 +109,22 @@
             </button>
             <div class="btn-group roll-nav roll-right" style="right: 140px;width: 100px;">
                 <button class="dropdown J_tabClose" data-toggle="dropdown" aria-expanded="false" style="width: 100px;">
-                    语言切换<span class="caret"></span>
+                    页签操作<span class="caret"></span>
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li><a class="" onclick="changeLang('zh_CN')">中文</a></li>
-                    <li><a class="" onclick="changeLang('en_US')">英文</a></li>
+                    <li><a class="tabCloseCurrent" href="javascript:void();">关闭当前</a></li>
+                    <li><a class="tabCloseOther" href="javascript:void();">关闭其他</a></li>
+                    <li><a class="tabCloseAll" href="javascript:void();">全部关闭</a></li>
                 </ul>
             </div>
             <div class="btn-group roll-nav roll-right">
                 <button class="dropdown J_tabClose" data-toggle="dropdown">
-                                                                          页签操作<span class="caret"></span>
+
+                语言切换<span class="caret"></span>
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                     <li><a class="tabCloseCurrent" href="javascript:void();">关闭当前</a></li>
-                     <li><a class="tabCloseOther" href="javascript:void();">关闭其他</a></li>
-					 <li><a class="tabCloseAll" href="javascript:void();">全部关闭</a></li>
+                    <li><a class="" onclick="changeLang('zh_CN')">中文</a></li>
+                    <li><a class="" onclick="changeLang('en_US')">英文</a></li>
                 </ul>
             </div>
 

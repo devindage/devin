@@ -20,6 +20,7 @@ public class TableSupport
         pageDomain.setPageSize(ServletUtils.getParameterToInt(Constants.PAGE_SIZE));
         pageDomain.setOrderByColumn(ServletUtils.getParameter(Constants.ORDER_BY_COLUMN));
         pageDomain.setIsAsc(ServletUtils.getParameter(Constants.IS_ASC));
+        pageDomain.setIsTransfer(ServletUtils.getParameter(Constants.IS_TRANSFER));
         return pageDomain;
     }
 

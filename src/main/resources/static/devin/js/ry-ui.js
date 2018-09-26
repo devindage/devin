@@ -8,10 +8,12 @@
     	table: {
             _option: {},
             _params: {},
+            isTransfer: "0",
             // 初始化表格
             init: function(options) {
                 $.table._option = options;
                 $.table._params = $.common.isEmpty(options.queryParams) ? $.table.queryParams : options.queryParams;
+                $.table.isTransfer = $.common.isEmpty(options.isTransfer) ? "" : options.isTransfer
                 _sortOrder = $.common.isEmpty(options.sortOrder) ? "asc" : options.sortOrder;
                 _sortName = $.common.isEmpty(options.sortName) ? "" : options.sortName;
                 $('#bootstrap-table').bootstrapTable({
@@ -25,11 +27,11 @@
                     sortOrder: _sortOrder,                              // 排序方式  asc 或者 desc
                     pagination: $.common.visible(options.pagination),   // 是否显示分页（*）
                     pageNumber: 1,                                      // 初始化加载第一页，默认第一页
-                    pageSize: 10,                                       // 每页的记录行数（*） 
+                    pageSize: 10,                                       // 每页的记录行数（*）
                     pageList: [10, 25, 50],                             // 可供选择的每页的行数（*）
                     iconSize: 'outline',                                // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
         	        toolbar: '#toolbar',                                // 指定工作栏
-                    sidePagination: "server",                           // 启用服务端分页 
+                    sidePagination: "server",                           // 启用服务端分页
                     search: $.common.visible(options.search),           // 是否显示搜索框功能
                     showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
         			showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
@@ -37,7 +39,9 @@
         			showExport: $.common.visible(options.showExport),   // 是否支持导出文件
                     queryParams: $.table._params,                       // 传递参数（*）
                     columns: options.columns,                           // 显示列信息（*）
-                    responseHandler: $.table.responseHandler            // 回调函数
+                    responseHandler: $.table.responseHandler,            // 回调函数
+                    striped: true,											//显示条纹
+                    onLoadSuccess:options.onLoadSuccess
                 });
             },
             // 查询条件
@@ -48,8 +52,9 @@
         			pageNum:        params.offset / params.limit + 1,
         			searchValue:    params.search,
         			orderByColumn:  params.sort,
-        			isAsc:          params.order
-        		}; 
+        			isAsc:          params.order,
+					isTransfer: $.common.isEmpty($.table.isTransfer) ? "": $.table.isTransfer
+        		};
             },
             // 请求获取数据后处理回调函数
             responseHandler: function(res) {
@@ -67,13 +72,18 @@
     		    params.queryParams = function(params) {
     		        var search = {};
     		        $.each($("#" + currentId).serializeArray(), function(i, field) {
-    		            search[field.name] = field.value;
+    		        	if(field.value && isDateTime(field.value)) {
+                            search[field.name] = dateToTimestamp(field.value);
+                        }else {
+                            search[field.name] = field.value;
+                        }
     		        });
     		        search.pageSize = params.limit;
     		        search.pageNum = params.offset / params.limit + 1;
     		        search.searchValue = params.search;
     		        search.orderByColumn = params.sort;
     		        search.isAsc = params.order;
+    		        search.isTransfer = $.table.isTransfer
     		        return search;
     		    }
     		    $("#bootstrap-table").bootstrapTable('refresh', params);
@@ -502,3 +512,32 @@ modal_status = {
     FAIL: "error",
     WARNING: "warning"
 };
+//1. 短日期，形如 (2008-07-22)
+function strDateTime1(str)
+{
+    var r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
+    if(r==null)return false;
+    var d= new Date(r[1], r[3]-1, r[4]);
+    return (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4]);
+}
+
+//2 长时间，形如 (2008-07-22 13:04:06)
+function strDateTime2(str)
+{
+    var reg = /^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2}) (\d{1,2}):(\d{1,2}):(\d{1,2})$/;
+    var r = str.match(reg);
+    if(r==null)return false;
+    var d= new Date(r[1], r[3]-1,r[4],r[5],r[6],r[7]);
+    return (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4]&&d.getHours()==r[5]&&d.getMinutes()==r[6]&&d.getSeconds()==r[7]);
+}
+//3.综合时间包含以上2种
+function isDateTime(str)
+{
+    return strDateTime1(str) || strDateTime2(str);
+}
+//时间字符串转时间戳
+function dateToTimestamp(date) {
+    date = date.substring(0,19);
+    date = date.replace(/-/g,'/');
+    return Math.round(new Date(date).getTime()/1000).toString();
+}

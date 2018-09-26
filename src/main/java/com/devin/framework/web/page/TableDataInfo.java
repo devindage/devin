@@ -17,6 +17,10 @@ public class TableDataInfo implements Serializable
     private List<?> rows;
     /** 消息状态码 */
     private int code;
+    /**
+     * 扩展，存如总计等数据
+     */
+    private Object data;
 
     /**
      * 表格数据对象
@@ -65,5 +69,13 @@ public class TableDataInfo implements Serializable
     public void setCode(int code)
     {
         this.code = code;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 }
